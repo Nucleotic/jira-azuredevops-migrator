@@ -129,7 +129,8 @@ namespace JiraExport
         private static List<JiraRevision> BuildCommentRevisions(JiraItem jiraItem, JiraProvider jiraProvider)
         {
             var renderedFields = jiraItem.RemoteIssue.SelectToken("$.renderedFields.comment.comments");
-            var comments = jiraProvider.Jira.Issues.GetCommentsAsync(jiraItem.Key).Result;
+            //var comments = jiraProvider.Jira.Issues.GetCommentsAsync(jiraItem.Key).Result;
+            var comments = new List<Comment>();
             return comments.Select((c, i) =>
             {
                 var rc = renderedFields.SelectToken($"$.[{i}].body");
